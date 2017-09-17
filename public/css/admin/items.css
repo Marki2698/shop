@@ -1,0 +1,20 @@
+.flex-item-container {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+}
+
+.item {
+    display: block;
+    position: relative;
+    width: 20%;
+    background-color: lightyellow;
+    border-radius: 5px;
+    margin: 0% 2%;
+}
+
+.item img {
+    position: relative;
+    width: 100%;
+}

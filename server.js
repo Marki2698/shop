@@ -27,7 +27,7 @@ app.use((req, res, next) => {
     next();
 });
 
-//connection.ConnectionBase();
+connection.ConnectionBase();
 //connection.ConnectionCatalog();
 app.use(require("./lib/routes/admin"));
 app.use(require("./lib/routes/admin-panel"));
