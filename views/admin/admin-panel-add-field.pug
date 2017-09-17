@@ -1,0 +1,47 @@
+div(class="parameters hidden-parameters")
+    p(class="close-parameters")
+        span &times;
+    form(name="parameters")
+        p name:
+        input(type="text", name="field-name", placeholder="name...")
+        p type:
+        input(type="radio", name="type", value="Number", checked)
+        label(for="type") Number
+        input(type="radio", name="type", value="String")
+        label(for="type") String
+        input(type="radio", name="type", value="Boolean")
+        label(for="type") Boolean
+        input(type="radio", name="type", value="Date")
+        label(for="type") Date
+        //- input(type="radio", name="type", value="ObjectId") ObjectId
+        //- input(type="radio", name="type", value="Mixed") Mixed
+        //- input(type="radio", name="type", value="Array") Array
+        //- input(type="radio", name="type", value="[Number]") [Number]
+        input(type="radio", name="type", value="[string]")
+        label(for="type") [String]
+        //- input(type="radio", name="type", value="[Boolean]") [Boolean]
+        //- input(type="radio", name="type", value="[Date]") [Date]
+        //- input(type="radio", name="type", value="[Buffer]") [Buffer]
+        //- input(type="radio", name="type", value="[ObjectId]") [ObjectId]
+        //- input(type="radio", name="type", value="[Mixed]") [Mixed]
+        //- input(type="radio", name="type", value="[Array]") [Array]
+        br
+        p parameters:
+        input(type="checkbox", name="required", value="required")
+        label(for="required") : required
+        input(type="checkbox", name="unique", value="unique")
+        label(for="unique") : unique
+        input(type="checkbox", name="index", value="index")
+        label(for="index") : index
+        input(type="checkbox", name="sparse", value="sparse")
+        label(for="sparse") : sparse
+        input(type="checkbox", name="lowercase", value="lowercase")
+        label(for="lowercase") : lowercase
+        input(type="checkbox", name="trim", value="trim")
+        label(for="trim") : trim
+        input(type="checkbox", name="uppercase", value="uppercase")
+        label(for="uppercase") : uppercase
+        input(type="checkbox", name="select", value="select")
+        label(for="select") : select
+        br
+        input(type="button", name="create-field", value="create field")

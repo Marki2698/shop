@@ -1,0 +1,13 @@
+include enter-header
+body
+    p= message
+    form(class="sign-login", action="/admin-sign", method="POST")
+        label(for="email") Your email :
+        input(type="text", name="email", placeholder="email...")
+        label(for="password") Your password :
+        input(type="password", name="password", placeholder="password...")
+        label(for="confirm") Confirm password :
+        input(type="password", name="confirm", placeholder="password...")
+        input(type="submit", name="submit", value="Sign")
+    script(type="text/javascript", src="/js/admin/sign.js")
+    include enter-footer

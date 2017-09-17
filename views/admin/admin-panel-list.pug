@@ -1,0 +1,13 @@
+div(class="admin-panel")
+     div(class="greeting")
+         p Hello Admin,
+         p(class="admin-email")= email
+     ul(class="list")
+         li 
+            a(href="/admin-panel/catalog") Catalog
+         li 
+            a(href="/admin-panel/orders") Orders
+         li 
+            a(href="/admin-panel/customers") Customers
+     form(class="admin-logout", action="/admin-logout", method="POST")
+         input(type="submit", name="logout", value="Logout")

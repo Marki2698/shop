@@ -1,0 +1,16 @@
+html
+    head
+        title New category
+        meta(charset="utf-8")
+        link(type="text/css", rel="stylesheet", href="/css/admin/admin-panel.css")
+        script(type="text/javascript", src="/js/common/jquery.js")
+    body
+        include admin-panel-list
+        div(class="new-category")
+            input(type="text", name="category-name", placeholder="Category name...")
+            p(class="caution") if you want add field for photos call it "images"!!!
+            div(class="schema")
+            input(type="button", name="add-field", value="add-field")
+            input(type="button", name="create-category", value="Create category")
+        include admin-panel-add-field
+        script(type="text/javascript", src="/js/admin/add-field.js")

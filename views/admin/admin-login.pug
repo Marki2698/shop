@@ -1,0 +1,11 @@
+include enter-header
+body
+    p= message
+    form(class="sign-login", action="/admin-login", method="POST")
+        label(for="email") Your email :
+        input(type="text", name="email", placeholder="email...")
+        label(for="password") Your password :
+        input(type="password", name="password", placeholder="password...")
+        input(type="submit", name="submit", value="Login")
+    script(type="text/javascript", src="/js/admin/login.js")
+    include enter-footer

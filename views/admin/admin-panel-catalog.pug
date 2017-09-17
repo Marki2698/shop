@@ -1,0 +1,15 @@
+html
+    head
+        title Admin catalog
+        meta(charset="utf-8")
+        link(type="text/css", rel="stylesheet", href="/css/admin/admin-panel.css")
+        script(type="text/javascript", src="/js/common/jquery.js")
+    body
+        include admin-panel-list
+        div(class="catalog")
+            form(class="category-ctrl")
+                input(type="button", name="add-category", value="Add category")
+                input(type="button", name="remove-category", value="Remove category")
+            p(class="message")= message
+            div(class="categories")
+        script(type="text/javascript", src="/js/admin/catalog.js")

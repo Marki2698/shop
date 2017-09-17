@@ -1,0 +1,167 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.admin-panel {
+    position: fixed;
+    width: 20%;
+    height: 100vh;
+    background-color: lightskyblue;
+}
+
+.admin-panel>.greeting {
+    position: relative;
+    width: 100%;
+}
+
+.admin-panel>.greeting>p:first-child {
+    font-style: italic;
+}
+
+.admin-panel>.greeting>.admin-email {
+    font-size: 1.5em;
+}
+
+.admin-panel>.list li {
+    list-style-type: none;
+    padding: 1em 0em 0em 0em;
+    text-align: center;
+}
+
+.admin-panel>.admin-logout {
+    background-color: gray;
+    color: white;
+}
+
+.admin-panel>.admin-logout>input[name="logout"] {
+    background-color: white;
+    color: gray;
+    position: relative;
+    width: 80%;
+    left: 10%;
+    /*height: 80%;*/
+    /*top: 10%;*/
+    padding: 1em 0em;
+    border-radius: 5px;
+    border: 0px;
+    transition: background-color .3s, color .3s;
+}
+
+.admin-panel>.admin-logout>input[name="logout"]:hover {
+    background-color: lightskyblue;
+    color: white;
+}
+
+h1:first-child {
+    position: relative;
+    width: 80%;
+    left: 20%;
+    top: 40%;
+    color: lightgray;
+    font-size: 3em;
+    text-align: center;
+}
+
+.catalog,
+.new-category,
+.items,
+.item-form {
+    position: relative;
+    width: 80%;
+    left: 20%;
+}
+
+
+/*.new-category {
+    position: relative;
+    width: 80%;
+    left: 20%;
+}*/
+
+p.message {
+    margin: 0;
+}
+
+.categories {
+    position: relative;
+    width: 100%;
+    /*display: flex;
+    justify-content: space-between;*/
+}
+
+.categories>.wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.categories>.wrapper>.category-item {
+    position: relative;
+    width: 15%;
+    background-color: lightskyblue;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.categories>.wrapper>.category-item>p {
+    margin: 15px 0px;
+    text-align: center;
+    position: relative;
+    /*width: 50%;*/
+}
+
+.cancel-remove {
+    position: relative;
+    display: inline-block;
+    width: 20%;
+    background-color: lightskyblue;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-category-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.remove-category-item p {
+    text-indent: 1em;
+}
+
+span.remove-category {
+    position: relative;
+    padding: 15px;
+    text-align: center;
+    background-color: red;
+    color: white;
+    border-radius: 0px 5px 5px 0px;
+    cursor: pointer;
+}
+
+.hidden-parameters {
+    display: none!important;
+}
+
+.parameters {
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    width: 40%;
+    background-color: white;
+    box-shadow: 0px 0px 10px 30px grey;
+}
+
+
+/*.items {
+    position: relative;
+    width: 80%;
+    left: 20%;
+}
+
+.item-form {
+    position: relative;
+    width: 80%;
+    left: 20%;
+}*/
