@@ -55,31 +55,7 @@ function BuildListOfItems(array) {
             $(container_for_four).attr({
                 "class": "flex-item-container"
             });
-        } //else {
-        /*let item = $(document.createElement("div"));
-        $(item).attr({
-            "class": "item"
-        });
-        if (array[i].images) {
-            let image = $(document.createElement("img"));
-            $(image).attr({
-                "src": array[i].images[0],
-                "alt": array[i].name
-            });
-            $(item).append(image);
-        } else {
-            let image = $(document.createElement("img"));
-            $(image).attr({
-                "src": "/images/no_photo.png",
-                "alt": array[i].name
-            });
-            $(item).append(image);
         }
-        let name = $(document.createElement("p"));
-        $(name).text(array[i].name);
-        $(item).append(name);
-        $(container_for_four).append(item);*/
-        //}
         let item = $(document.createElement("div"));
         item.attr({
             "class": "item"

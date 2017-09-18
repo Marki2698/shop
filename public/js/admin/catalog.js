@@ -149,6 +149,9 @@ function RemoveCategory(sure, name) {
             alert(res);
             ClearCategories();
             GetCategories();
+            $("input[name='remove-category']").click(() => {
+                ShowRemoveSign();
+            });
         },
         error(err) {
             console.error(err);

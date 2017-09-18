@@ -116,33 +116,37 @@ function createItem(fields) {
 }
 
 function SendImages(obj, fields) {
-    let form = new FormData(document.querySelector("form.file-form"));
-    $.ajax({
-        method: "POST",
-        url: "/add-images",
-        data: form,
-        cashe: false,
-        enctype: 'multipart/form-data',
-        processData: false,
-        contentType: false,
-        success(res) {
-            //alert(1);
-            alert(res);
-            SendData(obj, res, fields);
+    if (document.querySelector("form.file-form")) {
+        let form = new FormData(document.querySelector("form.file-form"));
+        $.ajax({
+            method: "POST",
+            url: "/add-images",
+            data: form,
+            cashe: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            success(res) {
+                //alert(1);
+                alert(res);
+                SendData(obj, res, fields);
 
-            //SendData(obj)
-            //alert(res);
-        },
-        error(err) {
-            alert(err);
-        }
-    });
+                //SendData(obj)
+                //alert(res);
+            },
+            error(err) {
+                alert(err);
+            }
+        });
+    } else {
+        SendData(obj, fields);
+    }
 }
 
-function SendData(obj, pathes, fields) {
+function SendData(obj, fields, pathes) {
     let correct_obj = {};
-    alert(Object.keys(obj).length);
-    alert(JSON.stringify(fields));
+    alert(JSON.stringify(obj));
+    alert(JSON.stringify(fields) + " are fields");
     for (let key in fields) {
         if (!obj.hasOwnProperty(key) && key === "images") {
             correct_obj[key] = pathes;
