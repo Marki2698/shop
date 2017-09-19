@@ -37,24 +37,28 @@ function AddItem() {
 }
 
 function BuildListOfItems(array) {
-    alert(Array.isArray(array));
     let list = $(document.createElement("div"));
     list.attr({
         "class": "items-list"
     });
-    //$("div.items").append(list);
     let container_for_four = $(document.createElement("div"));
     container_for_four.attr({
         "class": "flex-item-container"
     });
-    for (let i = 0; i < array.length; i++) {
-        //alert(123);
-        if (i === 4) {
+    for (let i = 0; i <= array.length; i++) {
+        if (i % 4 === 0) {
+            list.append(container_for_four);
+            $("div.items").append(list);
             $(list).append(document.createElement("br"));
             container_for_four = $(document.createElement("div"));
-            $(container_for_four).attr({
+            container_for_four.attr({
                 "class": "flex-item-container"
             });
+        }
+        if (i === array.length) {
+            list.append(container_for_four);
+            $("div.items").append(list);
+            break;
         }
         let item = $(document.createElement("div"));
         item.attr({
@@ -62,10 +66,17 @@ function BuildListOfItems(array) {
         });
         if (array[i].images) {
             let image = $(document.createElement("img"));
-            image.attr({
-                "src": array[i].images[0],
-                "alt": array[i].name
-            });
+            if (array[i].images.length === 0) {
+                image.attr({
+                    "src": "/images/no_photo.png",
+                    "alt": array[i].name
+                });
+            } else {
+                image.attr({
+                    "src": array[i].images[0],
+                    "alt": array[i].name
+                });
+            }
             item.append(image);
         } else {
             let image = $(document.createElement("img"));
@@ -79,9 +90,5 @@ function BuildListOfItems(array) {
         name.text(array[i].name);
         item.append(name);
         container_for_four.append(item);
-        //list.append(fontainer_for_four);
-        alert(123);
     }
-    list.append(container_for_four);
-    $("div.items").append(list);
 }

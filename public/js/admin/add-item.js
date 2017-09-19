@@ -129,7 +129,7 @@ function SendImages(obj, fields) {
             success(res) {
                 //alert(1);
                 alert(res);
-                SendData(obj, res, fields);
+                SendData(obj, fields, res);
 
                 //SendData(obj)
                 //alert(res);
@@ -154,7 +154,7 @@ function SendData(obj, fields, pathes) {
             correct_obj[key] = obj[key];
         }
     }
-    alert(JSON.stringify(correct_obj));
+    alert(JSON.stringify(correct_obj) + " is obj");
     //for(let key in fields)
     $.ajax({
         method: "POST",
