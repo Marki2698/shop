@@ -8,7 +8,7 @@ function GetItems() {
     //alert(name);
     $.ajax({
         method: "GET",
-        url: "/get-items",
+        url: "/get-admin-items",
         data: {
             name: name
         },
@@ -17,7 +17,7 @@ function GetItems() {
                 $("p.amount").text(res);
             } else {
                 $("p.amount").text(res.length);
-                alert(JSON.stringify(res));
+                //alert(JSON.stringify(res));
                 BuildListOfItems(res);
             }
             //alert(res);
@@ -89,6 +89,16 @@ function BuildListOfItems(array) {
         let name = $(document.createElement("p"));
         name.text(array[i].name);
         item.append(name);
+        item.attr("item-id", array[i].id);
+        $(item).click((e) => {
+            let category = document.title;
+            let id = item.attr("item-id");
+            GoToItem(id);
+        });
         container_for_four.append(item);
     }
+}
+
+function GoToItem(id) {
+    window.location.href += `/${id}`;
 }

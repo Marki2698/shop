@@ -68,7 +68,8 @@ h1:first-child {
 .catalog,
 .new-category,
 .items,
-.item-form {
+.item-form,
+.update-item {
     position: relative;
     width: 80%;
     left: 20%;

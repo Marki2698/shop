@@ -1,0 +1,11 @@
+html
+    head
+        title= title
+        link(type="text/css", rel="stylesheet", href="/css/admin/admin-panel.css")
+        link(type="text/css", rel="stylesheet", href="/css/admin/item.css")
+        script(type="text/javascript", src="/js/common/jquery.js")
+    body
+        include admin-panel-list
+        div(class="update-item")
+            p(class="id-number")= id
+        script(type="text/javascript", src="/js/admin/item.js")
