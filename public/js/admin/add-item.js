@@ -117,7 +117,10 @@ function createItem(fields) {
 
 function SendImages(obj, fields) {
     if (document.querySelector("form.file-form")) {
+        //let another = new FormData();
+        //another.append()
         let form = new FormData(document.querySelector("form.file-form"));
+        form.append("category", localStorage.getItem("category"));
         $.ajax({
             method: "POST",
             url: "/add-images",
