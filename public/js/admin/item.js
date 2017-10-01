@@ -25,18 +25,14 @@ function getData() {
 }
 
 function ShowFields(obj) {
-    let parent = $("div.update-item");
+    let parent = $("div.update-item-fields");
     let fields = $(document.createElement("form"));
     fields.attr({
         "name": "update-form",
         "class": "update-form"
     });
 
-    // WARNING!!!
-    delete obj._id;
-    delete obj.__v;
-    delete obj.id;
-    // WARNING!!!
+    if (obj.hasOwnProperty("_id")) RemoveKeys(obj);
 
     for (let key in obj) {
         if (key !== "id" || key !== "_id" || key !== "__v") {
@@ -117,20 +113,74 @@ function BuildImageField(key, array, parent) {
 
     file_form.append(label, file_input);
     image_field.append(file_form, container);
-    image_field.insertAfter($("p.id-number"));
+    parent.prepend(image_field);
     //parent.prepend(file_form, container);
 }
 
+function RemoveKeys(obj) {
+    delete obj._id;
+    delete obj.__v;
+    delete obj.id;
+}
+
+function RefreshItem(res) {
+    $("div.update-item-fields").empty();
+    ShowFields(res);
+}
+
 function RemoveImage(src) {
-    changeLog._src = [];
+    if (!changeLog._src) changeLog._src = [];
     changeLog._src.push(src);
     alert(changeLog._src);
 }
 
-function SaveChanges() {
+function AddImages() {
+    if ($("form.file-form")) return new FormData(document.querySelector("form.file-form"));
+    return false;
+}
 
+function ConfigureData() {
+    RemoveKeys(changeLog._default);
+    let update = {};
+    let data;
+    for (let key in changeLog._default) {
+        if (key === "images") {
+            data = AddImages();
+        }
+    }
+    for (let key in changeLog._default) {
+        if (key === "images") continue;
+        update[key] = $("input[name='" + key + "']").val();
+    }
+    update["remove-images"] = changeLog._src;
+    data.append("update", JSON.stringify(update));
+    data.append("category", document.title);
+    data.append("id", $("p.id-number").text());
+    //alert(data.valueOf());
+    return data;
+}
+
+function SaveChanges() {
+    let data = ConfigureData();
+    $.ajax({
+        method: "POST",
+        url: "/update-item",
+        data: data,
+        cashe: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        success(res) {
+            alert(res);
+        },
+        error(err) {
+            console.error(err);
+        }
+    });
+    //alert(JSON.stringify(update));
 }
 
 function CancelChanges() {
-
+    alert(JSON.stringify(changeLog._default));
+    RefreshItem(changeLog._default);
 }
