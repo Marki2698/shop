@@ -132,7 +132,7 @@ function SendImages(obj, fields) {
             success(res) {
                 //alert(1);
                 alert(res);
-                SendData(obj, fields, res);
+                SendData(obj, fields, res[1], res[0]);
 
                 //SendData(obj)
                 //alert(res);
@@ -146,7 +146,7 @@ function SendImages(obj, fields) {
     }
 }
 
-function SendData(obj, fields, pathes) {
+function SendData(obj, fields, imgFolder, pathes) {
     let correct_obj = {};
     alert(JSON.stringify(obj));
     alert(JSON.stringify(fields) + " are fields");
@@ -157,6 +157,7 @@ function SendData(obj, fields, pathes) {
             correct_obj[key] = obj[key];
         }
     }
+    //correct_obj["image-folder"] = imgFolder;
     alert(JSON.stringify(correct_obj) + " is obj");
     //for(let key in fields)
     $.ajax({
@@ -164,7 +165,8 @@ function SendData(obj, fields, pathes) {
         url: "/add-item",
         data: {
             info: JSON.stringify(correct_obj),
-            category: localStorage.getItem("category")
+            category: localStorage.getItem("category"),
+            imgFolder: imgFolder
         },
         success(res) {
             alert(res);

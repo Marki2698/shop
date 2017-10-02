@@ -129,14 +129,33 @@ function RefreshItem(res) {
 }
 
 function RemoveImage(src) {
-    if (!changeLog._src) changeLog._src = [];
-    changeLog._src.push(src);
+    if (!changeLog._src) changeLog._src = changeLog._default["images"];
+    alert(changeLog._src);
+    let index = changeLog._src.indexOf(src);
+    changeLog._src.splice(index, 1);
     alert(changeLog._src);
 }
 
 function AddImages() {
     if ($("form.file-form")) return new FormData(document.querySelector("form.file-form"));
     return false;
+}
+
+function ImgFolder() {
+    // 7 + name of category
+    if (!changeLog._src) {
+        if (changeLog._default["images"]) {
+            let category_length = document.title.length;
+            return changeLog._default["images"][0].substr(0, 7 + category_length);
+        } else {
+            // ???
+        }
+    } else {
+        let category_length = document.title.length;
+        let substr = changeLog._src[0].substr(0, 7 + category_length);
+        alert(substr);
+        return substr;
+    }
 }
 
 function ConfigureData() {
@@ -149,13 +168,17 @@ function ConfigureData() {
         }
     }
     for (let key in changeLog._default) {
-        if (key === "images") continue;
-        update[key] = $("input[name='" + key + "']").val();
+        if (key === "images") {
+            update[key] = changeLog._src;
+        } else {
+            update[key] = $("input[name='" + key + "']").val();
+        }
     }
-    update["remove-images"] = changeLog._src;
+    //update["remove-images"] = changeLog._src;
     data.append("update", JSON.stringify(update));
     data.append("category", document.title);
     data.append("id", $("p.id-number").text());
+    data.append("folder", ImgFolder());
     //alert(data.valueOf());
     return data;
 }
