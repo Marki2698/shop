@@ -16,6 +16,7 @@ function getData() {
         success(res) {
             alert(Object.getOwnPropertyNames(res));
             changeLog._default = res;
+            changeLog._src = res["images"];
             ShowFields(res);
         },
         error(err) {
@@ -152,9 +153,14 @@ function ImgFolder() {
         }
     } else {
         let category_length = document.title.length;
-        let substr = changeLog._src[0].substr(0, 7 + category_length);
-        alert(substr);
-        return substr;
+        if (!changeLog._src[0]) {
+            return "";
+        } else {
+            return changeLog._src[0].substr(0, 7 + category_length);
+        }
+        //let substr = changeLog._src[0].substr(0, 7 + category_length);
+        //alert(substr);
+        //return substr;
     }
 }
 
@@ -169,6 +175,7 @@ function ConfigureData() {
     }
     for (let key in changeLog._default) {
         if (key === "images") {
+            alert(changeLog._src + " is src");
             update[key] = changeLog._src;
         } else {
             update[key] = $("input[name='" + key + "']").val();
