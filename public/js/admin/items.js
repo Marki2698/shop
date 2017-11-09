@@ -31,10 +31,14 @@ function GetItems() {
 
 function AddItem() {
     $("form.items-ctrl > input[name='add']").click((e) => {
-        alert(window.location.href);
-        localStorage.setItem("category", document.title);
-        window.location.href += "/new-item";
+        ListenerForAddItemsBtn();
     });
+}
+
+function ListenerForAddItemsBtn() {
+    alert(window.location.href);
+    localStorage.setItem("category", document.title);
+    window.location.href += "/new-item";
 }
 
 function BuildListOfItems(array) {
@@ -92,94 +96,132 @@ function BuildListOfItems(array) {
         item.append(name);
         item.attr("item-id", array[i].id);
         $(item).click((e) => {
-            let category = document.title;
-            let id = item.attr("item-id");
-            GoToItem(id);
+            GoToItem();
         });
         container_for_four.append(item);
     }
 }
 
-function GoToItem(id) {
+function GoToItem() {
+    let category = document.title;
+    let id = $(".item").attr("item-id");
     window.location.href += `/${id}`;
 }
 
 function ShowRemoveItems() {
     $("form.items-ctrl > input[name='remove']").click((e) => {
-        //alert("asdf");
-        $("form.items-ctrl > input[name='remove']").off("click");
-        $("form.items-ctrl > input[name='add']").off("click");
-        $(".item").off("click");
-        //alert("asdf");
-        /*$(".item").each(() => {
-            //alert("asdf");
-            let elem = $(document.createElement("input"));
-            elem.attr({
-                "type": "checkbox",
-                "name": "to-remove",
-                "remove-id": $(this).attr("item-id")
-            });
-            //alert("asdf");
-            //alert(JSON.stringify($(this)));
-            $(this).prepend(elem);
-            alert("asdf");
-        });*/
+        ListenerForRemoveItemsBtn();
+    });
+}
+
+function ListenerForRemoveItemsBtn() {
+    $("form.items-ctrl > input[name='remove']").off("click");
+    $("form.items-ctrl > input[name='add']").off("click");
+    $(".item").off("click");
+    /*let elem = $(document.createElement("input"));
+    elem.attr({
+        "type": "checkbox",
+        "name": "to-remove"
+    });*/
+    let list = document.querySelectorAll(".item");
+    for (let i = 0; i < list.length; i++) {
+        alert(i);
         let elem = $(document.createElement("input"));
         elem.attr({
             "type": "checkbox",
-            "name": "to-remove",
-            "remove-id": $(this).attr("item-id")
+            "name": "to-remove"
         });
-        let list = document.querySelectorAll(".item");
-        for (let i = 0; i < list.length; i++) {
-            /*let elem = $(document.createElement("input"));
-            elem.attr({
-                "type": "checkbox",
-                "name": "to-remove",
-                "remove-id": $(this).attr("item-id")
-            });*/
-            $(list.item(i)).prepend(elem);
-            alert("asdf");
-        }
+        $(list.item(i)).prepend(elem);
+        $(list.item(i)).children(elem).attr("remove-id", $(elem).parent().attr("item-id"));
+        //alert("asdf");
+    }
 
-        let cancelBtn = $(document.createElement("button"));
-        cancelBtn.attr({
-            "name": "cancel-remove"
-        });
-        cancelBtn.text("Cancel Remove");
-        cancelBtn.click((e) => {
-            $("form.items-ctrl > input[name='remove']").on("click");
-            $("form.items-ctrl > input[name='add']").on("click");
-            $(".item").on("click");
-            HideRemoveItems(".item", elem);
-        });
-
-        let subminBtn = $(document.createElement("button"));
-        subminBtn.attr({
-            "name": "submit-remove"
-        });
-        subminBtn.text("Remove");
-        subminBtn.click((e) => {
-            $("form.items-ctrl > input[name='remove']").on("click");
-            $("form.items-ctrl > input[name='add']").on("click");
-            let checked = $("input[name='to-remove']");
-            $(".item").on("click");
-            RemoveSelectedItems(checked);
-        });
-
-        cancelBtn.insertAfter($("p.amount"));
-        subminBtn.insertAfter($("p.amount"));
+    let cancelBtn = $(document.createElement("button"));
+    cancelBtn.attr({
+        "name": "cancel-remove"
     });
+    cancelBtn.text("Cancel Remove");
+    cancelBtn.click((e) => {
+        $("form.items-ctrl > input[name='remove']").click((e) => {
+            ListenerForRemoveItemsBtn();
+        });
+        $("form.items-ctrl > input[name='add']").click((e) => {
+            ListenerForAddItemsBtn();
+        });
+        $(".item").click((e) => {
+            GoToItem();
+        });
+        HideRemoveItems(".item", "input[name='to-remove']");
+    });
+
+    let subminBtn = $(document.createElement("button"));
+    subminBtn.attr({
+        "name": "submit-remove"
+    });
+    subminBtn.text("Remove");
+    subminBtn.click((e) => {
+        $("form.items-ctrl > input[name='remove']").click((e) => {
+            ListenerForRemoveItemsBtn();
+        });
+        $("form.items-ctrl > input[name='add']").click((e) => {
+            ListenerForAddItemsBtn();
+        });
+        let checked = document.querySelectorAll("input[name='to-remove']");
+        $(".item").click((e) => {
+            GoToItem();
+        });
+        //RemoveSelectedItems(checked);
+        HideRemoveItems(".item", "input[name='to-remove']");
+        RemoveSelectedItems(checked);
+    });
+
+    cancelBtn.insertAfter($("p.amount"));
+    subminBtn.insertAfter($("p.amount"));
 }
 
 function HideRemoveItems(selector, sign) {
     let parent = document.querySelectorAll(selector);
+    let _sign = document.querySelectorAll(sign);
     for (let i = 0; i < parent.length; i++) {
-        $(parent.item(i)).children(sign).remove(sign);
+        alert(parent.length);
+        parent.item(i).removeChild(_sign.item(i));
     }
+
+    HideRemoveButtons();
     // cancel
 }
 
+function HideRemoveButtons() {
+    $("button[name='cancel-remove']").remove();
+    $("button[name='submit-remove']").remove();
+}
+
 function RemoveSelectedItems(checked) {
+    let arr_id = [];
+    for (let i = 0; i < checked.length; i++) {
+        if (checked.item(i).checked) arr_id.push(checked.item(i).getAttribute("remove-id"));
+    }
+    alert(document.title);
+    alert(arr_id);
+
+    let info = {
+        category: document.title,
+        items: arr_id
+    };
+    $.ajax({
+        method: "POST",
+        url: "/remove-admin-items",
+        data: {
+            info: JSON.stringify(info)
+        },
+        success(res) {
+            alert(res);
+            $(".items-list").remove();
+            GetItems();
+        },
+        error(err) {
+            alert(err);
+        }
+    });
     //ajax request and re-render
 }
