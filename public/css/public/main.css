@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    text-align: center;
+    background-color: steelblue;
+}
+
+.logo p {
+    margin: 0;
+    padding: 20px 0px;
+}
+
+.navbar ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    list-style: none;
+}
+
+.navbar ul li.more {
+    position: relative;
+    width: 20%;
+    text-align: center;
+}
+
+.navbar ul li.search {
+    position: relative;
+    width: 80%;
+}
+
+.navbar ul li.search input[type="text"] {
+    position: relative;
+    width: 70%;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+.navbar ul li.search button {
+    position: relative;
+    width: 20%;
+    margin-left: 5%;
+}
+
+.list-display {
+    display: block!important;
+}
+
+.list {
+    display: none;
+    position: absolute;
+    width: 20%;
+    background-color: darkturquoise;
+}

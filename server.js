@@ -33,6 +33,7 @@ app.use(require("./lib/routes/admin"));
 app.use(require("./lib/routes/admin-panel"));
 app.use(require("./lib/routes/categories"));
 app.use(require("./lib/routes/items"));
+app.use(require("./lib/routes/public"));
 
 app.listen(config.port, () => {
     console.log(`Listening on ${config.port} port`);
