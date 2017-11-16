@@ -96,15 +96,15 @@ function BuildListOfItems(array) {
         item.append(name);
         item.attr("item-id", array[i].id);
         $(item).click((e) => {
-            GoToItem();
+            GoToItem(item);
         });
         container_for_four.append(item);
     }
 }
 
-function GoToItem() {
+function GoToItem(item) {
     let category = document.title;
-    let id = $(".item").attr("item-id");
+    let id = $(item).attr("item-id");
     window.location.href += `/${id}`;
 }
 
