@@ -171,6 +171,8 @@ function ConfigureData() {
     for (let key in changeLog._default) {
         if (key === "images") {
             data = AddImages();
+        } else {
+            data = new FormData();
         }
     }
     for (let key in changeLog._default) {
