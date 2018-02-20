@@ -62,3 +62,61 @@ function ListenerForClose() {
         $(".list").removeClass("list-display");
     })
 }
+
+function DownloadHot() {
+    $.ajax({
+        method: "GET",
+        url: "/get-hot",
+        success(res) {
+            console.log(res);
+        },
+        error(err) {
+            console.error(err);
+        }
+    });
+}
+
+function BuildHotCarousel(arr) { 
+    //li(data-target="#HotProducts", data-slide-to="0", class="active")
+    let indicator_parent = document.querySelector(".carousel-indicators");
+    let indicator = document.createElement("li");
+    indicator.setAttribute("data-target", "#HotProducts");
+
+    let image_parent = document.querySelector(".carousel-inner");
+    let image_container = document.createElement("div");
+    image_container.className("carousel-item");
+    let img = document.createElement("img");
+    img.classList = "d-block w-100";
+    for(let i = 0; i < arr.length; i++) {
+        
+        let loop_indicator = indicator;
+        let loop_img = img;
+        let loop_img_container = image_container;
+        
+        if(i === 0) {
+
+            loop_indicator.setAttribute("data-slide-to", i.toString(10));
+            loop_indicator.className = "active";
+            indicator_parent.appendChild(loop_indicator);
+
+            loop_img_container.classList.add("active");
+            loop_img.alt = arr[i].alt;
+            loop_img.src = arr[i].src;
+            loop_img_container.appendChild(loop_img);
+            image_parent.appendChild(loop_img_container);
+       
+        } else {
+            loop_indicator.setAttribute("data-slide-to", i.toString(10));
+            indicator_parent.appendChild(loop_indicator);
+
+            loop_img.alt = arr[i].alt;
+            loop_img.src = arr[i].src;
+            loop_img_container.appendChild(loop_img);
+            image_parent.appendChild(loop_img_container);
+        }
+    }
+};
+
+function DownloadNew() {
+
+}

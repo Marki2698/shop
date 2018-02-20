@@ -57,3 +57,8 @@ body {
     width: 20%;
     background-color: darkturquoise;
 }
+
+.footer {
+    position: absolute;
+    bottom: 0%;
+}
