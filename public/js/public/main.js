@@ -22,6 +22,7 @@ function Download() {
         success(res) {
             alert(Array.isArray(res));
             BuildList(res);
+            DownloadHot();
         },
         error(err) {
             console.error(err);
@@ -40,12 +41,19 @@ function BuildList(categories) {
     close_sign.innerHTML = `&times;`;
     close_p.appendChild(close_sign);
     list.appendChild(close_p);
-    for (let category of categories) {
-        let a = document.createElement("a");
-        a.href = `/${category}`;
-        a.innerHTML = category;
-        list.appendChild(a);
+    if(Array.isArray(categories)) {
+        for (let category of categories) {
+            let a = document.createElement("a");
+            a.href = `/${category}`;
+            a.innerHTML = category;
+            list.appendChild(a);
+        }
+    } else {
+        let p = document.createElement("p");
+        p.innerHTML = categories;
+        list.appendChild(p);
     }
+
     document.querySelector("body").appendChild(list);
     ListenerForClose();
     ListenerForMore();
@@ -64,11 +72,21 @@ function ListenerForClose() {
 }
 
 function DownloadHot() {
+    let categories = document.querySelectorAll("div.list a");
+    let names  = [];
+    for(let item of categories) {
+        names.push(item.innerHTML);
+    }
+    alert(names);
     $.ajax({
         method: "GET",
         url: "/get-hot",
+        data: {
+            names: names
+        },
         success(res) {
             console.log(res);
+            //BuildHotCarousel(res);
         },
         error(err) {
             console.error(err);
