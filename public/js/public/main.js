@@ -95,44 +95,36 @@ function DownloadHot() {
 }
 
 function BuildHotCarousel(arr) { // arr = [{}]
-    //li(data-target="#HotProducts", data-slide-to="0", class="active")
-    let indicator_parent = document.querySelector(".carousel-indicators");
-    let indicator = document.createElement("li");
-    indicator.setAttribute("data-target", "#HotProducts");
-
-    let image_parent = document.querySelector(".carousel-inner");
-    let image_container = document.createElement("div");
-    image_container.className = "carousel-item";
-    let img = document.createElement("img");
-    img.classList = "d-block w-100";
-
-    let anchor_container = document.createElement("div");
-    anchor_container.classList = "carousel-caption d-md-block";
-    let anchor = document.createElement("a");
-
     for(let i = 0; i < arr.length; i++) {
-        
-        let loop_indicator = indicator;
-        let loop_img = img;
-        let loop_img_container = image_container;
-        let loop_anchor_container = anchor_container;
-        let loop_anchor = anchor;
+        console.log(i);
+        let indicator_parent = document.querySelector(".carousel-indicators");
+        let indicator = document.createElement("li");
+        indicator.setAttribute("data-target", "#HotProducts");
+
+        let image_parent = document.querySelector(".carousel-inner");
+        let image_container = document.createElement("div");
+        image_container.className = "carousel-item";
+        let img = document.createElement("img");
+        img.classList = "d-block w-100";
+
+        let anchor_container = document.createElement("div");
+        anchor_container.classList = "carousel-caption d-md-block";
+        let anchor = document.createElement("a");
         
         if(i === 0) {
-            loop_indicator.className = "active";
-            loop_img_container.classList.add("active");    
+            indicator.className = "active";
+            image_container.classList.add("active");    
         }        
-        loop_indicator.setAttribute("data-slide-to", i.toString(10));
-        indicator_parent.appendChild(loop_indicator);
-        loop_img.alt = arr[i].name;
-        loop_img.src = arr[i].src;
-        loop_anchor.href = `/${arr[i].category}/${arr[i].id}`;
-        loop_anchor.innerHTML = arr[i].name;
-        loop_img_container.appendChild(loop_img);
-        loop_anchor_container.appendChild(loop_anchor);
-        image_parent.appendChild(loop_img_container);
-        image_parent.appendChild(loop_anchor_container);
-        
+        indicator.setAttribute("data-slide-to", i.toString(10));
+        indicator_parent.appendChild(indicator);
+        img.alt = arr[i].name;
+        img.src = arr[i].src;
+        anchor.href = `/${arr[i].category}/${arr[i].id}`;
+        anchor.innerHTML = arr[i].name;
+        image_container.appendChild(img);
+        anchor_container.appendChild(anchor);
+        image_container.appendChild(anchor_container);
+        image_parent.appendChild(image_container);
     }
 };
 
