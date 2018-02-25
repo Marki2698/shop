@@ -1,0 +1,13 @@
+html
+    head
+        title= name
+        meta(charset="utf-8")
+        link(type="text/css", rel="stylesheet", href="/css/public/item.css")
+        link(type="text/css", rel="stylesheet", href="/css/common/bootstrap/css/bootstrap.css")
+        script(type="text/javascript", src="/js/common/jquery.js")
+    body
+        p(class="id")= id
+        p(class="category")= category
+        include footer
+        script(type="text/javascript", src="/js/common/bootstrap/js/bootstrap.bundle.js")
+        script(type="text/javascript", src="/js/public/item.js")

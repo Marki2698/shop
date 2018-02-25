@@ -22,6 +22,7 @@ function Download() {
         success(res) {
             alert(Array.isArray(res));
             BuildList(res);
+            DownloadNew();
             DownloadHot();
         },
         error(err) {
@@ -71,22 +72,27 @@ function ListenerForClose() {
     })
 }
 
-function DownloadHot() {
+function getCategoryList() {
     let categories = document.querySelectorAll("div.list a");
     let names  = [];
     for(let item of categories) {
         names.push(item.innerHTML);
     }
-    alert(names);
+    return names;
+}
+
+function DownloadHot() {
+    //alert(names);
     $.ajax({
         method: "GET",
         url: "/get-hot",
         data: {
-            names: names
+            names: getCategoryList()
         },
         success(res) {
-            console.log(res);
-            BuildHotCarousel(res);
+            console.log(res + " = hot");
+            if(typeof res === "string") return false;
+            else BuildCarousel(res, "HotProducts");
         },
         error(err) {
             console.error(err);
@@ -94,14 +100,34 @@ function DownloadHot() {
     });
 }
 
-function BuildHotCarousel(arr) { // arr = [{}]
+function DownloadNew() {
+    $.ajax({
+        method: "GET",
+        url: "/get-new",
+        data: {
+            names: getCategoryList()
+        },
+        success(res) {
+            console.log(res + " = new");
+            if(typeof res === "string") return false;
+            else BuildCarousel(res, "NewProducts");
+        },
+        error(err) {
+            console.error(err);
+        }
+    });
+}
+
+// does not work =((
+function BuildCarousel(arr, id) { // arr = [{}]
     for(let i = 0; i < arr.length; i++) {
         console.log(i);
-        let indicator_parent = document.querySelector(".carousel-indicators");
+        //console.log(`#${id} > .carousel-indicators`);
+        let indicator_parent = document.querySelector(`#${id} > .carousel-indicators`);
         let indicator = document.createElement("li");
-        indicator.setAttribute("data-target", "#HotProducts");
+        indicator.setAttribute("data-target", `#${id}`);
 
-        let image_parent = document.querySelector(".carousel-inner");
+        let image_parent = document.querySelector(`#${id} > .carousel-inner`);
         let image_container = document.createElement("div");
         image_container.className = "carousel-item";
         let img = document.createElement("img");
@@ -127,7 +153,3 @@ function BuildHotCarousel(arr) { // arr = [{}]
         image_parent.appendChild(image_container);
     }
 };
-
-function DownloadNew() {
-
-}

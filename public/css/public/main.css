@@ -63,7 +63,7 @@ body {
     bottom: 0%;
 }
 
-.hot-products {
+.new-products, .hot-products {
     position: relative;
     width: 70%;
     left: 15%;
