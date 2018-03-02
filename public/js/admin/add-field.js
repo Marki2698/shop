@@ -92,8 +92,7 @@ function SendSchema(category) {
         method: "POST",
         url: "/create-category",
         data: {
-            name: name,
-            schema: JSON.stringify(category)
+            name: name
         },
         success(res) {
             alert(res);

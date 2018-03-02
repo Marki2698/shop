@@ -19,7 +19,25 @@ $(document).ready(() => {
     GetCategories();
 
     $("input[name='add-category']").click(() => {
-        window.location.pathname = "/admin-panel/new-category";
+        //window.location.pathname = "/admin-panel/new-category";
+        let name = prompt("Enter name of new category : ");
+        $.ajax({
+            method: "POST",
+            url: "/create-category",
+            data: {
+                name: name
+            },
+            success(res) {
+                alert(res);
+                ClearCategories();
+                GetCategories();
+                // code;
+            },
+            errorr(err) {
+                // code;
+                alert(err);
+            }
+        });
     });
 
     $("input[name='remove-category']").click(() => {

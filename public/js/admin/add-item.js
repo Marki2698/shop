@@ -10,8 +10,8 @@ function getSchema() {
             name: localStorage.getItem("category")
         },
         success(res) {
-            alert(JSON.stringify(res));
-            makeFields(res);
+            alert(res);
+            //makeFields(res);
         },
         error(err) {
             alert(err);
@@ -28,7 +28,7 @@ function makeFields(fields) {
     for (let key in fields) {
         let required;
         //console.log(fields);
-        if (key === "images" || key === "photos" || key === "photo" || key === "image") {
+        if (key === "images") {
             let file_form = $(document.createElement("form"));
             file_form.attr({
                 "enctype": "multipart/form-data",
