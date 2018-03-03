@@ -11,7 +11,7 @@ function getSchema() {
         },
         success(res) {
             alert(res);
-            //makeFields(res);
+            makeFields(JSON.parse(res));
         },
         error(err) {
             alert(err);
@@ -54,6 +54,7 @@ function makeFields(fields) {
             $(file_form).append(label, file_input);
             $("div.item-form").append(file_form);
         } else {
+            alert(key);
             let label = $(document.createElement("label"));
             label.attr("for", key);
             if (fields[key]["required"]) {
@@ -70,7 +71,8 @@ function makeFields(fields) {
                 "required": required,
                 "placeholder": fields[key]["type"]
             });
-            $(form).append(label, field);
+            let br = document.createElement("br");
+            $(form).append(label, field, br);
         }
     }
     let create = $(document.createElement("input"));
