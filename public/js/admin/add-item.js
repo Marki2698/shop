@@ -64,13 +64,26 @@ function makeFields(fields) {
                 required = false;
                 label.text(key + " : ");
             }
-            let field = $(document.createElement("input"));
-            field.attr({
-                "name": key,
-                "type": "text",
-                "required": required,
-                "placeholder": fields[key]["type"]
-            });
+            let field;
+            if(key === "specification") {
+                field = $(document.createElement("textarea"));
+                field.attr({
+                    "name": key,
+                    "required": required,
+                    "placeholder": "{'field': value}",
+                    "rows": 10,
+                    "cols": 30
+                });
+            } else {
+                field = $(document.createElement("input"));
+                field.attr({
+                    "name": key,
+                    "type": "text",
+                    "required": required,
+                    "placeholder": fields[key]["type"]
+                });
+            }
+            if(key === "category") field.attr("value", localStorage.getItem("category"));
             let br = document.createElement("br");
             $(form).append(label, field, br);
         }

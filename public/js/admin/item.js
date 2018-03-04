@@ -45,13 +45,30 @@ function ShowFields(obj) {
                     "for": key
                 });
                 label.text(key);
-                let input = $(document.createElement("input"));
+                let field;
+                if(key === "specification") {
+                    field = $(document.createElement("textarea"));
+                    field.attr({
+                        "name": key,
+                        "rows": 10,
+                        "cols": 30
+                    });
+                    $(field).val(obj[key]);
+                } else {
+                    field = $(document.createElement("input"));
+                    field.attr({
+                        "name": key,
+                        "type": "text",
+                        "value": obj[key]
+                    });
+                }
+                /* let input = $(document.createElement("input"));
                 input.attr({
                     "name": key,
                     "type": "text",
                     "value": obj[key]
-                });
-                fields.append(label, input, $(document.createElement("br")));
+                }); */
+                fields.append(label, field, $(document.createElement("br")));
             }
         }
     }
@@ -180,7 +197,11 @@ function ConfigureData() {
             alert(changeLog._src + " is src");
             update[key] = changeLog._src;
         } else {
-            update[key] = $("input[name='" + key + "']").val();
+            if(key === "specification") {
+                update[key] = document.querySelector("textarea").value;
+            } else {
+                update[key] = $("input[name='" + key + "']").val();
+            }
         }
     }
     //update["remove-images"] = changeLog._src;

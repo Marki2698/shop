@@ -24,3 +24,7 @@
     /*border: 5px solid red;*/
     background-color: red;
 }
+
+textarea {
+    display: block;
+}

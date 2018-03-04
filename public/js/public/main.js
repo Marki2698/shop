@@ -91,7 +91,7 @@ function DownloadHot() {
         },
         success(res) {
             console.log(res + " = hot");
-            if(typeof res === "string") return false;
+            if(typeof res === "string") EmptyCarousel("HotProducts", res);
             else BuildCarousel(res, "HotProducts");
         },
         error(err) {
@@ -109,7 +109,7 @@ function DownloadNew() {
         },
         success(res) {
             console.log(res + " = new");
-            if(typeof res === "string") return false;
+            if(typeof res === "string") EmptyCarousel("NewProducts", res);
             else BuildCarousel(res, "NewProducts");
         },
         error(err) {
@@ -118,7 +118,15 @@ function DownloadNew() {
     });
 }
 
-// does not work =((
+function EmptyCarousel(id, msg) {
+    $(`#${id}`).empty();
+    let p = document.createElement("p");
+    p.className = "message";
+    p.innerHTML = msg;
+    $(`#${id}`).append(p);
+}
+
+
 function BuildCarousel(arr, id) { // arr = [{}]
     for(let i = 0; i < arr.length; i++) {
         console.log(i);
