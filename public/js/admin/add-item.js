@@ -54,7 +54,7 @@ function makeFields(fields) {
             $(file_form).append(label, file_input);
             $("div.item-form").append(file_form);
         } else {
-            alert(key);
+            //alert(key);
             let label = $(document.createElement("label"));
             label.attr("for", key);
             if (fields[key]["required"]) {
@@ -108,25 +108,38 @@ function makeFields(fields) {
 
 function createItem(fields) {
     $("input[name='create']").click((e) => {
-
-        let inputs = document.querySelectorAll("div.item-form .create-form input[type='text']");
         let labels = document.querySelectorAll("div.item-form .create-form label");
+        let inputs = document.querySelectorAll("div.item-form .create-form input[type='text']");
         let obj = {};
-        //alert(labels.length + " is length");
-        for (let i = 0; i < inputs.length; i++) {
-            //alert(labels.item(i).hasAttribute("for"));
-            if (inputs.item(i).getAttribute("required") !== "" && inputs.item(i).value !== "") {
-                obj[labels.item(i).getAttribute("for")] = inputs.item(i).value;
-            } else if (inputs.item(i).getAttribute("required") === "") {
-                obj[labels.item(i).getAttribute("for")] = inputs.item(i).value;
+        let flag = 1;
+
+        for(let i = 0; i < labels.length; i++) {
+            if(labels.item(i).getAttribute("for") !== "specification") {
+                if(inputs.item(i).getAttribute("required") !== "" && inputs.item(i).value !== "") {
+                    obj[labels.item(i).getAttribute("for")] = inputs.item(i).value;
+                } else if(inputs.item(i).getAttribute("required") === "") {
+                    obj[labels.item(i).getAttribute("for")] = inputs.item(i).value;
+                } else {
+                    alert("FIll all required fields");
+                    flag = 0;
+                    break;
+                }
             } else {
-                alert("You should enter required fields");
-                break;
-                return false;
+                try {
+                    let str = document.querySelector("textarea[name='specification']").value;
+                    alert(str);
+                    let spec = JSON.parse(str);
+                    obj[labels.item(i).getAttribute("for")] = str;
+                } catch(err) {
+                    alert(err);
+                    alert("Fill in correct form and try again. Example: {\"field\":value, \"field\":value}");
+                    flag = 0;
+                    break;
+                }
             }
         }
-        //alert(JSON.stringify(obj));
-        SendImages(obj, fields);
+
+        if(flag) SendImages(obj, fields);
     });
 }
 

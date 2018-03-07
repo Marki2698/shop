@@ -185,6 +185,7 @@ function ConfigureData() {
     RemoveKeys(changeLog._default);
     let update = {};
     let data;
+    let flag = 1;
     for (let key in changeLog._default) {
         if (key === "images") {
             data = AddImages();
@@ -198,7 +199,15 @@ function ConfigureData() {
             update[key] = changeLog._src;
         } else {
             if(key === "specification") {
-                update[key] = document.querySelector("textarea").value;
+                try {
+                    JSON.parse(document.querySelector("textarea").value);
+                    update[key] = document.querySelector("textarea").value;    
+                }catch(err) {
+                    alert("Fill in correct form and try again. Example: {\"field\":value, \"field\":value}");
+                    flag = 0;
+                    break;
+                }
+                //update[key] = document.querySelector("textarea").value;
             } else {
                 update[key] = $("input[name='" + key + "']").val();
             }
@@ -210,11 +219,13 @@ function ConfigureData() {
     data.append("id", $("p.id-number").text());
     data.append("folder", ImgFolder());
     //alert(data.valueOf());
-    return data;
+    if(flag) return data;
+    else return false;
 }
 
 function SaveChanges() {
     let data = ConfigureData();
+    if(!data) return false;
     $.ajax({
         method: "POST",
         url: "/update-item",
