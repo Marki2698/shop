@@ -1,0 +1,24 @@
+html
+    head
+        title= name
+        meta(charset="utf-8")
+        link(type="text/css", rel="stylesheet", href="/css/public/category_items.css")
+        link(type="text/css", rel="stylesheet", href="/css/common/bootstrap/css/bootstrap.css")
+        script(type="text/javascript", src="/js/common/jquery.js")
+    body
+        include header
+        - var source;
+        div(class="items-container")
+            each item in items
+                if item.images == 0
+                   - source = "/images/no_photo.png"
+                else
+                   - source = item.images[0]
+                div(class="item")
+                    img(alt=item.name, src=source)
+                    p(class="item-name")= item.name
+                    p(class="item-price")= item.price
+                    button(class="buy-button")= "Buy"
+        include footer
+        script(type="text/javascript", src="/js/common/bootstrap/js/bootstrap.bundle.js")
+        script(type="text/javascript", src="/js/public/category_items.js")

@@ -1,0 +1,15 @@
+.items-container {
+    position: relative;
+    width: 80%;
+}
+
+.item {
+    position: relative;
+    display: inline-block;
+    width: 25%;
+}
+
+.item img {
+    position: relative;
+    width: 50%;
+}
