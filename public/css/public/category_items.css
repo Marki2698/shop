@@ -9,6 +9,16 @@
     width: 25%;
 }
 
+.item-name {
+    text-decoration-style: none;
+    color: black;
+    display: block;
+}
+
+.item-name:hover {
+    color: black;
+}
+
 .item img {
     position: relative;
     width: 50%;

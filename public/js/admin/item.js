@@ -214,6 +214,7 @@ function ConfigureData() {
         }
     }
     //update["remove-images"] = changeLog._src;
+    alert(JSON.stringify(data));
     data.append("update", JSON.stringify(update));
     data.append("category", document.title);
     data.append("id", $("p.id-number").text());
@@ -226,6 +227,7 @@ function ConfigureData() {
 function SaveChanges() {
     let data = ConfigureData();
     if(!data) return false;
+    alert(JSON.stringify(data));
     $.ajax({
         method: "POST",
         url: "/update-item",

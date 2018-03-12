@@ -16,7 +16,7 @@ html
                    - source = item.images[0]
                 div(class="item")
                     img(alt=item.name, src=source)
-                    p(class="item-name")= item.name
+                    a(class="item-name", href="/" + name + "/" + item.id + "")= item.name
                     p(class="item-price")= item.price
                     button(class="buy-button")= "Buy"
         include footer
